@@ -1,0 +1,41 @@
+<div class="container ">
+  <div class="card m-5 p-5">
+    <div class="card-body">
+      <h1><%= @restaurant.name %></h1>
+      <p><%= @restaurant.category %></p>
+    </div>
+
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item"> <%= @restaurant.address %> </li>
+      <li class="list-group-item"> <%= @restaurant.phone_number %> </li>
+    </ul>
+
+    <div class="card-body">
+      <h2>Reviews</h2>
+        <ul class="list-group list-group-flush">
+          <% @reviews.each do |review| %>
+            <li class="list-group-item">
+              <%= review.content %> - <%= review.rating %>
+              <i class="fas fa-star" style="color:#FAB005"></i>
+            </li>
+          <% end %>
+        </ul>
+    </div>
+
+    <div class="card p-5 m-5" id="review-form">
+      <h1>Leave a review</h1>
+      <%= simple_form_for [ @restaurant, @review ] do |f| %>
+        <%= f.input :content %>
+        <%= f.input :rating %>
+        <%= f.submit "Submit review", class: "btn btn-primary" %>
+      <% end %>
+    </div>
+
+    <div class="card-body">
+      <%= link_to 'Leave a review', new_restaurant_review_path(@restaurant), class: "btn btn-primary" %>
+      <%= link_to 'Back', restaurants_path, class: "btn btn-primary" %>
+    </div>
+
+  </div>
+</div>
+
